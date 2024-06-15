@@ -11,11 +11,11 @@ initial_filename=filename[0]
 print(initial_filename)
 #test_filename=filename[1]
 
-testing = folderpath + "/output_csv/" +"parameters_test.csv"
+testing = folderpath + "/output_csv/" +"test_30_train.csv"
 #testing = folderpath + "/output_csv/" + "/test_sst.csv"
 test = pd.read_csv(testing)
 
-training = folderpath + "/output_csv/" +"parameters_trai.csv"
+training = folderpath + "/output_csv/" +"train_70_train.csv"
 #training= folderpath + "/output_csv/" + "/train_sst.csv"
 train = pd.read_csv(training)
 
@@ -41,13 +41,13 @@ for index,row in train.iterrows():
     row = row.values.tolist()
     #ID = row[0]
     train_data.append(row)
-print("Length of train data:",len(train_data))
+# print("Length of train data:",len(train_data))
     
 for index,row in test.iterrows():
     row = row.values.tolist()
     #ID = row[0]
     test_data.append(row)        
-print("Length of test data:",len(test_data)) 
+# print("Length of test data:",len(test_data)) 
 label=0
 p_true=0
 final=[]
@@ -57,7 +57,7 @@ p_false=0
 df= folderpath + "/output_csv/" +"R_value.csv"
 rvalue_df = pd.read_csv(df)
 rvalue=[]
-print(rvalue_df.shape)
+# print(rvalue_df.shape)
 for index,row in rvalue_df.iterrows():
     row = row.values.tolist()
     rvalue.append(row)
@@ -66,7 +66,7 @@ for index,row in rvalue_df.iterrows():
 df= folderpath + "/output_csv/" +"similarity.csv"
 sim_value_df = pd.read_csv(df)
 sim_value=[]
-print(sim_value_df.shape)
+# print(sim_value_df.shape)
 for index,row in sim_value_df.iterrows():
     row = row.values.tolist()
     sim_value.append(row)
@@ -74,7 +74,7 @@ for index,row in sim_value_df.iterrows():
 df= folderpath + "/output_csv/" +"distance.csv"
 dist_df = pd.read_csv(df)
 dist_value=[]
-print(dist_df.shape)
+# print(dist_df.shape)
 for index,row in dist_df.iterrows():
     row = row.values.tolist()
     dist_value.append(row)
@@ -98,7 +98,7 @@ def compare(test_id,check_array):
     #print(test_id)
     list1=rvalue[test_id]
     list1.remove(list1[0])
-    #print(list1)
+    # print(list1)
     list2=sim_value[test_id]
     list2.remove(list2[0])
     #print(list2, "Len:",len(list2), list2[0], list2[3751])
@@ -117,7 +117,7 @@ def compare(test_id,check_array):
         check_r.append(list1[pos])
         #if list2[pos]>0.20:
         sim.append(list2[pos])
-        if list3[pos]<100:
+        if list3[pos]<200:
             dist.append(list3[pos])
     #list1.sort()
     #print(check_r)
@@ -147,12 +147,11 @@ def compare(test_id,check_array):
 pred_final=[]
 flag=0
 for count in range(0,len(test_data)):
-#for count in range(22, 23):
     test_id=test_data[count][0] 
     temp1=[]
     pred=[]
-    print("\n")
-    print("id:",test_id) 
+    # print("\n")
+  # print("id:",test_id) 
     pred.append(test_id)
     label = test_data[count][20]
     #print("Label of test_",count+1, ":  ",label)
@@ -167,6 +166,7 @@ for count in range(0,len(test_data)):
     test_lss = test_data[count][17]
     test_rss = test_data[count][18]
     test_cl_size = test_data[count][19]
+    test_unique_cl_count = test_data[count][21]
 
     p=q=0
     arr=[]
@@ -174,8 +174,13 @@ for count in range(0,len(test_data)):
     train_index=[]
     cl_data=test_data[count][1]
     result=len(set((cl_data).split (",")))
-    #print(set(cl_data),result)
+    if(test_mcl_count == 1 and test_unique_cl_count == 1):
+        print("hi")
+
+    # print(set(cl_data),result)
     if (result) == 1:
+        print(" hello")
+        # print(count , cl_data)
         for index in range(0, len(train_data)):
             length=len(set((train_data[index][1]).split (",")))
             if (length) == 1:
@@ -187,14 +192,28 @@ for count in range(0,len(test_data)):
                 c=c+1
             else:
                 d=d+1
+        
+        # print(c,d)
         if c>d:
-            label_1=0
+            label1=0
         else:
-            label_1=1
+            label1=1
             
-    elif (test_cl_size<=10 and test_cl_size>=450) or (test_cl_size<40 and test_cl_size>=30):
-        label1=0
+    # elif (test_cl_size<=10 and test_cl_size>=450) or (test_cl_size<40 and test_cl_size>=30):
+    #     label1=0
            
+    #     print(label,label1)
+    
+    elif(test_mcl_count == 1 and test_unique_cl_count == 1):
+        if(test_range == 8 or test_range == 6):
+            label1 = 1
+        else:
+            label1 = 0
+        
+        print(label,label1)
+        
+        
+    
         """   
     #elif test_mcl_value>=27 and test_mcl_value!=30:
         #label1=0
@@ -233,7 +252,7 @@ for count in range(0,len(test_data)):
         """
     else:
         check_array=[]
-        print("...........")
+        # print("...........")
 
         for index in range(0, len(train_data)):
             if (test_group==train_data[index][12]) and (test_mclgroup == train_data[index][13]):
@@ -241,13 +260,13 @@ for count in range(0,len(test_data)):
                     arr.append(train_data[index])
         if (len(arr))>=50:
             arr2=[]
-            print("Hi..")
+            # print("Hi..")
             for ro in arr: 
                 if ro[3]==test_mcl_value:
                     arr2.append(ro)
             if len(arr2)>30:
                 arr3=[]
-                print("Hihoo..")
+              # print("Hihoo..")
                 for ro in arr2: 
                     if (ro[15]==test_lsf and ro[16]==test_rsf) or (ro[17]==test_lss and ro[18]==test_rss):
                         arr3.append(ro)
@@ -255,16 +274,16 @@ for count in range(0,len(test_data)):
                 if len(arr3)<=30:
                     check_array=arr3
                 else:
-                    print("me toooooo") 
+                  # print("me toooooo") 
                     arr4=[]
                     for ro in arr3:
                         if (ro[5] == test_cl_minus):
                             arr4.append(ro)
-                    if len(arr4)<=30 or len(arr4)>30:
+                    if len(arr4)<=30:
                         check_array=arr4
                     else:
                         arr5=[]
-                        print("finally I am here")
+                        # print("finally I am here")
                         for ro in arr4:
                             if (ro[19] ==(test_cl_size)):
                                 arr5.append(ro)
@@ -277,15 +296,15 @@ for count in range(0,len(test_data)):
                         check_array=arr5
                         
             else:
-                print("meeee...")
+              # print("meeee...")
                 check_array=arr
                 
         elif (len(arr))>10 and (len(arr))<50:
-            print("Hihi..")
+          # print("Hihi..")
             check_array=arr
             
         else:
-            print("Hihihi...")
+            # print("Hihihi...")
             arr6=[]
             for index in range(0, len(train_data)):
                 if (train_data[index][14]==(test_range) or train_data[index][3]==test_mcl_value):
@@ -298,7 +317,7 @@ for count in range(0,len(test_data)):
                 else:
                     check_array=arr6
  
-        print("Length of check_array",len(check_array))
+        # print("Length of check_array",len(check_array))
         #label_sim, label_dist, label_r,label_c_score =compare(count,check_array)
         label_sim, label_dist, label_r = compare(count,check_array)
         
@@ -315,19 +334,13 @@ for count in range(0,len(test_data)):
     pred.append(label1)
     pred_final.append(pred)            
 #print(check_array[0][0])            
+# print(pred_final)
 
 header = ['Id', 'Prediction']
 #print("zero valued checkarray",flag)
 dest2 = folderpath + "/output_csv/" + "final_prediction1" + ".csv"   
 params_df = pd.DataFrame(pred_final, columns=header)
 params_df.to_csv(dest2, index = False) 
-
-#print(rvalue_df)
-
-    
-
-
-#print(rvalue_df)
 
     
 """            

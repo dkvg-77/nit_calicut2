@@ -15,8 +15,8 @@ filename = file1.read().split("\n")
 
 initial_filename = filename[0]
 # test_filename=filename[1]
-cl_train_data = pd.read_csv(folderpath + "/output_csv/" + "parameters_trai.csv")
-cl_test_data = pd.read_csv(folderpath + "/output_csv/" + "parameters_test.csv" )
+cl_train_data = pd.read_csv(folderpath + "/output_csv/" + "train_70_train.csv")
+cl_test_data = pd.read_csv(folderpath + "/output_csv/" + "test_30_train.csv" )
 
 sim = []
 dist = []

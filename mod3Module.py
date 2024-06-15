@@ -55,7 +55,7 @@ def get_mcl_location(cl_seq, cl_signal):
     mcl_loc = []
     cl_len = len(cl_signal)
     mcl = get_mcl(cl_seq)
-    print("length of cl_siqnal=",len(cl_signal))
+    # print("length of cl_siqnal=",len(cl_signal))
     
     for i in range(cl_len):
         if cl_signal[i][0] == mcl:
@@ -106,8 +106,8 @@ def get_mcl_range(cl_seq, mcl):
 def get_lsf_rsf(cl_seq,mcl,cl_signal):
      ret = [0]*4
      mcl_signals = [x for i, x in enumerate(cl_signal) if x[0] == mcl]
-     print("mcl_signals:",mcl_signals)  
-     print("mcl_signals length:",len(mcl_signals))
+    #  print("mcl_signals:",mcl_signals)  
+    #  print("mcl_signals length:",len(mcl_signals))
      # finding LSF and LSS
      flag1=0
      flag2=0
@@ -121,13 +121,13 @@ def get_lsf_rsf(cl_seq,mcl,cl_signal):
           
          for s in range(len(cl_signal)):
              if cl_signal[s] == mcl_signals[i]:   
-                 print("cl signal index", cl_signal.index(cl_signal[s]))
+                #  print("cl signal index", cl_signal.index(cl_signal[s]))
                  loc.append(cl_signal.index(cl_signal[s]))
          
-         print("hi", loc)
+        #  print("hi", loc)
          for j in range(loc[i]-1,loc[i]-6,-1) :   
              if j>=0:
-                 print("cl",cl_signal[j])
+                #  print("cl",cl_signal[j])
                  if cl_signal[j][0]==1:
                      break
                  elif cl_signal[j][0]!=1 and cl_signal[j][0]!=mcl_signals[i][0]: 
@@ -141,7 +141,7 @@ def get_lsf_rsf(cl_seq,mcl,cl_signal):
  
          for j in range(loc[i]+1,loc[i]+6,1) :   
              if j<len(cl_signal):
-                 print("cl",cl_signal[j])
+                #  print("cl",cl_signal[j])
                  if cl_signal[j][0]==1:
                      break
                  elif cl_signal[j][0]!=1 and cl_signal[j][0]!=mcl_signals[i][0]: 

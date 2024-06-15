@@ -27,11 +27,12 @@ def feature_extract(initial_filename):
     file2 = open(folderpath + '/parameter/datapos.txt', 'r')
     datapos = int(file2.read())
 
-    cl_fileName = "cl_all.csv"
+    cl_fileName = "initial_data.csv"
 
     inidata = pd.read_csv(folderpath + '/output_csv/' + cl_fileName)
     cl_data = pd.read_csv(folderpath + "/output_csv/" + cl_fileName)
     destination = folderpath + "/output_csv/" + "parameters_" + 'train.xlsx'
+    print(destination)
     parameters = []
     text = []
     label = []
@@ -49,8 +50,8 @@ def feature_extract(initial_filename):
         row = row.values.tolist()
         cl_sequence = row[2].split(',')
 
-        print("\nInput Number " + str(counter))
-        print("cl_sequence:", cl_sequence)
+        # print("\nInput Number " + str(counter))
+        # print("cl_sequence:", cl_sequence)
 
         for i in range(0, len(cl_sequence)):
             cl_sequence[i] = int(cl_sequence[i])
@@ -58,20 +59,20 @@ def feature_extract(initial_filename):
         counter += 1
         cl_dict = convert(cl_sequence)
 
-        print("Dictionary =", cl_dict)
-        print("length of cl_siquence=", len(cl_sequence))
-        print("length of dictionary=", len(cl_dict))
+        # print("Dictionary =", cl_dict)
+        # print("length of cl_siquence=", len(cl_sequence))
+        # print("length of dictionary=", len(cl_dict))
 
         cl_size = len(cl_sequence)
         # mcl1=max(cl_sequence)
         mcl = m3m.get_mcl(cl_sequence)
-        print("Mcl value is: " + str(mcl))
+        # print("Mcl value is: " + str(mcl))
 
         cl_signal = m3m.get_signal(cl_sequence, cl_dict)
-        print(cl_signal)
+        # print(cl_signal)
 
         nmcl = m3m.get_nmcl(cl_sequence, cl_signal)
-        print("Nmcl list is: " + str(nmcl))
+        # print("Nmcl list is: " + str(nmcl))
 
         max_nmcl = max(nmcl, default=0)
 
@@ -86,7 +87,7 @@ def feature_extract(initial_filename):
         # print("Mcl count is: "+str(mcl_count))
 
         unique_cl_count = len(set(cl_sequence))
-        print("unique_cl_count", unique_cl_count)
+        # print("unique_cl_count", unique_cl_count)
 
         #############################################################################
         nmcl_location = m3m.get_nmcl_location(cl_sequence, nmcl, cl_signal)
@@ -118,7 +119,7 @@ def feature_extract(initial_filename):
             nmcl] + [nmcl_location] + [signal_location_vector] + [signal_distance_vector] + [lsdv] + [rsdv] + [
                          str(group_val)] + [str(mcl_group)] + [str(mcl_range)] + [str(lsf)] + [str(rsf)] + [
                          str(lss)] + [str(rss)] + [cl_size] + [label[index]] + [unique_cl_count]
-        print(final_list)
+        # print(final_list)
         # print("RSDV is: " + str(rsdv))
         parameters.append(final_list)
 
@@ -128,7 +129,7 @@ def feature_extract(initial_filename):
 
     params_df = pd.DataFrame(parameters)
     col_dict = df_colname_dict_creator(cl_data)
-    print(params_df)
+    # print(params_df)
     col_dict[0] = 'id'
     col_dict[1] = 'cl_data'
     col_dict[2] = 'mcl_locations'

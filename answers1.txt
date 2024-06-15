@@ -1,0 +1,86 @@
+// First attempt
+
+train.csv
+Length of train data: 3795
+Length of test data: 1627
+accuracy %: 0.7019053472649047 
+True predictions= 1142 
+False predictions= 485
+[[1049  194]
+ [ 291   93]]
+
+accuracy: 70.19053472649047
+
+tp,fp,fn are: 93 291 194
+
+precision: 0.2421875
+recall: 0.3240418118466899
+F-score: 0.27719821162444114
+
+
+
+
+
+// Second attempt
+train.csv
+Length of train data: 3795
+Length of test data: 1627
+accuracy %: 0.6834665027658267 
+True predictions= 1112 
+False predictions= 515
+[[1006  237]
+ [ 278  106]]
+
+accuracy: 68.34665027658266
+
+tp,fp,fn are: 106 278 237
+
+precision: 0.2760416666666667
+recall: 0.30903790087463556
+F-score: 0.29160935350756534
+
+
+
+
+
+
+3rd attempt
+train.csv
+Length of train data: 3795
+Length of test data: 1627
+accuracy %: 0.704978488014751 
+True predictions= 1147 
+False predictions= 480
+[[1054  189]
+ [ 291   93]]
+
+accuracy: 70.4978488014751
+
+tp,fp,fn are: 93 291 189
+
+precision: 0.2421875
+recall: 0.32978723404255317
+F-score: 0.27927927927927926
+
+
+
+
+
+4th attempt
+
+train.csv
+Length of train data: 3795
+Length of test data: 1627
+accuracy %: 0.686539643515673 
+True predictions= 1117 
+False predictions= 510
+[[1011  232]
+ [ 278  106]]
+
+accuracy: 68.6539643515673
+
+tp,fp,fn are: 106 278 232
+
+precision: 0.2760416666666667
+recall: 0.3136094674556213
+F-score: 0.29362880886426596

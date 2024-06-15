@@ -1,6 +1,5 @@
 import os
 import feature_module as ft
-import nltk
 #nltk.download()
 folderpath = str(os.getcwd())
 

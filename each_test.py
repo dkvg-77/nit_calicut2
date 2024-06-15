@@ -9,11 +9,11 @@ filename = file1.read().split("\n")
 initial_filename=filename[0]
 #test_filename=filename[1]
 
-testing = folderpath + "/output_csv/" +"parameters_test.csv"
+testing = folderpath + "/output_csv/" +"test_30_train.csv"
 #testing = folderpath + "/output_csv/" + "/test_sst.csv"
 test = pd.read_csv(testing)
 
-training = folderpath + "/output_csv/" +"parameters_trai.csv"
+training = folderpath + "/output_csv/" +"train_70_train.csv"
 #training= folderpath + "/output_csv/" + "/train_sst.csv"
 train = pd.read_csv(training)
 
